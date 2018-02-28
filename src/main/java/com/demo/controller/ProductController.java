@@ -58,16 +58,18 @@ public class ProductController {
 	@ApiOperation(value = "To find all the Product", notes = "To find all the Product ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "To Find all the Product"),
 			@ApiResponse(code = 500, message = "Internal Server Error") })
-	@RequestMapping(value = "/findAllProduct", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/findAllProduct", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<?> findAllProduct(){
 		Response<List<Product>> resp = new Response<>();
+		
 		try {
 			resp.setCode(Code.SUCCESS.name());
 			resp.setMessage("Get All product");
 			resp.setData(service.getAllProduct());
-			return new ResponseEntity<Response<List<Product>>>(resp, HttpStatus.FOUND);
+			return new ResponseEntity<Response<List<Product>>>(resp, HttpStatus.CREATED);
 			
 		}catch(Exception e) {
+			e.printStackTrace();
 			resp.setCode(Code.FAIL.name());
 			resp.setMessage("fail while fetching data");
 			resp.setData(null);
@@ -78,14 +80,14 @@ public class ProductController {
 	@ApiOperation(value = "Find by Product Id ", notes = "find By Product Id")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "To Find all the Product"),
 			@ApiResponse(code = 500, message = "Internal Server Error") })
-	@RequestMapping(value = "/findById", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/findById", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<?> findById(@RequestParam String param){
 		Response<Product> resp = new Response<>();
 		try {
 			resp.setCode(Code.SUCCESS.name());
 			resp.setMessage("Get by Id product:"+param);
 			resp.setData(service.getProductById(param));
-			return new ResponseEntity<Response<Product>>(resp, HttpStatus.FOUND);
+			return new ResponseEntity<Response<Product>>(resp, HttpStatus.CREATED);
 			
 		}catch(Exception e) {
 			resp.setCode(Code.FAIL.name());

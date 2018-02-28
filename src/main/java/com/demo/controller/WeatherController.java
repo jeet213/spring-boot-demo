@@ -26,7 +26,7 @@ public class WeatherController {
 	@ApiOperation(value = "get Weather By City name ", notes = "get Weather")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "get Weather"),
 			@ApiResponse(code = 500, message = "Internal Server Error") })
-	@RequestMapping(value = "/getweatherByCityName", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/getweatherByCityName", method = RequestMethod.GET, produces = "application/json")
 
 	public ResponseEntity<?> getWeather(@RequestParam String param) {
 		Response<ResponseEntity<Example>> resp = new Response<>();
