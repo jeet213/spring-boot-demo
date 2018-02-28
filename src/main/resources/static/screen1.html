@@ -1,0 +1,29 @@
+<div ng-controller="productCtl">
+	<div class="wrapper col-md-8" style="margin-left:200px; margin-top:100px;  width:500px;">
+		
+		<form>
+		<div class="row" >
+			<div class="col-sm-12">
+			<p><b>Product Registration</b></p>
+		Product Id:<input type="text" class="form-control" ng-model="product.id" required/>
+			</div>
+				<div class="col-sm-12">
+		Product Name :<input type="text" class="form-control" ng-model="product.name"/>
+			</div>
+			<div class="col-sm-12">
+		Product Type :<input type="text" class="form-control" ng-model="product.type"/>
+			</div>
+			<div class="col-sm-12">
+		Product Price :<input type="text" class="form-control" ng-model="product.price" min="0" max="1000" />
+			</div>
+			<div class="col-sm-12">
+		Product Desc :<input type="text" class="form-control" ng-model="product.desc"/>
+			</div>
+						
+		</div>
+	<button type="button" class="btn btn-lg btn-primary btn-block space" style="background-color:#E60000; border:none; font-weight: 600; color:white;" ng-click="productSubmit()" >Submit</button>
+	<span ng-show="show">{{message}}</span>
+</form>
+			
+		</div>
+</div>

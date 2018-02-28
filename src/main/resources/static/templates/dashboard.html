@@ -1,0 +1,92 @@
+<div class="container">
+<div class="row col-lg-12">
+  <div class="header" style="background-color:#E60000; color:white; width:100%;height:100px; border:7px solid white; border-radius: 25px; border-bottom:none">
+  <h1><center>Demo</center></h1>
+
+
+</div>
+</div>
+
+<div class="row col-lg-12">
+<div class="tab">
+<br>
+
+  <button class="tablinks button1" onclick="openCity(event, 'CreateProduct')" id="defaultOpen" >CreateProduct</button><br>
+  <br>
+  <button class="tablinks button1" onclick="openCity(event, 'FindProductById')">FindProductById</button><br>
+  <br>
+  <button class="tablinks button1" onclick="openCity(event, 'FindAll')">Delete</button><br>
+  <br>
+  <button class="tablinks button1" onclick="openCity(event, 'DeleteProduct')">FindAll</button><br>
+  <br>
+  <button class="tablinks button1" onclick="openCity(event, 'WeatherByName')">WeatherByName</button><br>
+  <br>
+</div>
+
+<div id="CreateProduct" class="tabcontent">
+
+<script>
+function openTab(tabName) {
+  var i, x;
+  x = document.getElementsByClassName("containerTab");
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  document.getElementById(tabName).style.display = "block";
+}
+</script>
+<div class="container">
+<div class="col-lg-12">
+<div  ng-include="'screen1.html'"></div>
+ 
+</div>
+
+</div>
+
+</div>
+
+<div id="FindProductById" class="tabcontent">
+<div class="row">
+<div  ng-include="'screen2.html'"></div> 
+</div>
+</div>
+
+<div id="FindAll" class="tabcontent">
+<div class="row">
+<div  ng-include="'screen3.html'"></div> 
+</div>
+</div>
+
+<div id="DeleteProduct" class="tabcontent">
+<div class="row">
+<div  ng-include="'screen4.html'"></div> 
+</div>
+</div>
+
+<div id="WeatherByName" class="tabcontent">
+  <div class="row">
+<div  ng-include="'screen5.html'"></div> 
+</div>
+  </div>
+
+
+<script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+<!--Get the element with id="defaultOpen" and click on it-->
+document.getElementById("defaultOpen").click();
+</script>
+</div>
+</div> 

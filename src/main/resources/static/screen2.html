@@ -1,0 +1,46 @@
+<div ng-controller="findByIdCtl">
+<div class="wrapper col-md-8"
+	style="margin-left: 200px; margin-top: 50px; width: 400px;">
+
+	<form>
+		<div class="row">
+			<div class="col-sm-12">
+				<p>
+					<b>Find Product By Id</b>
+				</p>
+				Product :<input type="text"  class="form-control" ng-model="productId" required>
+			</div>
+			
+		</div>
+		
+	
+		<button type="submit" class="btn btn-lg btn-primary btn-block space"
+				style="background-color: #E60000; border: none; font-weight: 600; color: white;" ng-click="submitById()">Submit</button>
+	
+	<br> 
+	 <table class="table" style="border-radius:20px;">
+    <thead style="background-color:#E60000; color:white; ">
+      <tr>
+        <th>Product Id</th>
+        <th>product Name</th>
+        <th>Product Type</th>
+        <th>price($)</th>
+         <th>desc</th>
+      </tr>
+    </thead>
+    <tbody>
+    <span ng-show="show">{{message}}</span>
+      <tr>
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.type}}</td>
+         <td>{{product.price}}</td>
+        <td>{{product.desc}}</td>
+      </tr>      
+     
+    </tbody>
+  </table>
+	</form>
+
+</div>
+</div>

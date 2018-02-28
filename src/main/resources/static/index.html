@@ -1,0 +1,130 @@
+<html>
+<head xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"></meta>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport"></meta>
+<title>Dashboard</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	<link rel="stylesheet" href="../css/extern.css">
+		<link rel="stylesheet" href="../css/new.css">
+<link rel='stylesheet prefetch'
+	href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<!-- angular js -->
+<script
+	src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script
+	src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+<script src="js/app/angular.min.js"></script>
+<script src="js/app/angular-route.js"></script>
+<script src= "js/app/angular-md5.min.js"></script>
+<link rel="stylesheet" href="/css/new.css">
+</head>
+
+<body ng-app="app" >
+<div class="container" ng-view></div>
+</body>
+<script>
+ 	var app = angular.module('app', ["ngRoute"]);
+
+  	app.config(function($routeProvider) {
+ 	    $routeProvider
+ 	    .when("/", {
+ 	        templateUrl : "templates/dashboard.html"
+ 	       
+ 	    })
+ 	       
+ 	    .otherwise({
+            redirectTo : "templates/login.html"
+        });
+ 	    
+ 	});
+ 	
+ 	app.controller("productCtl",function($http, $log, $scope){
+ 		$scope.show = false;
+ 		var product ={};
+ 		$log.info("Post object >>"+JSON.stringify($scope.product))
+ 		$scope.productSubmit = function(){
+ 			$http.post("http://localhost:8080/demo/product/v1/createProduct",$scope.product).then(function(response){
+ 				$scope.product ={};
+ 				if(response.data.code =='SUCCESS'){
+ 					$scope.show = true;
+ 					$scope.message ="Product created Successfully.."
+ 				}
+ 			},function(error){
+ 				$scope.show = true;
+				$scope.message ="Server Error. Please try after sometime";
+ 			})
+ 		}
+ 	});
+	app.controller("findByIdCtl",function($http, $log, $scope){
+ 		$scope.show = false;
+ 		
+ 		$scope.submitById = function(){
+ 			$http.get("http://localhost:8080/demo/product/v1/findById?param="+$scope.productId).then(function(response){
+ 				if(response.data.code =='SUCCESS'){
+ 				 $scope.show = false;
+ 				 $scope.product =response.data.data
+ 				}
+ 			},function(error){
+ 				$scope.show = true;
+				$scope.message ="Server Error. Please try after sometime";
+ 			})
+ 		}
+ 	});
+	app.controller("deleteByIdCtl",function($http, $log, $scope){
+ 		$scope.show = false;
+ 		
+ 		$scope.submitById = function(){
+ 			$http.post("http://localhost:8080/demo/product/v1/deleteById?param="+$scope.productId).then(function(response){
+ 				if(response.data.code =='SUCCESS'){
+ 					$scope.show = true;
+ 					$scope.message ="Product id "+$scope.productId + " deleted Successfully.."
+ 				}
+ 			},function(error){
+ 				$scope.show = true;
+				$scope.message ="Server Error. Please try after sometime";
+ 			})
+ 		}
+ 	});
+	app.controller("findAllCtl",function($http, $log, $scope){
+ 		$scope.show = false;
+ 		$scope.submitById = function(){
+ 			$http.get("http://localhost:8080/demo/product/v1/findAllProduct").then(function(response){
+ 				$log.info("productList>>"+JSON.stringify(response.data.data))
+ 				if(response.data.code =='SUCCESS'){
+ 					$scope.show = false;
+ 					$scope.productList = response.data.data;
+ 				}else {
+ 					$scope.show = true;
+ 					$scope.message ="Server Error. Please try after sometime";
+ 				}
+ 			},function(error){
+ 				$scope.show = true;
+				$scope.message ="Server Error. Please try after sometime";
+ 			})
+ 		}
+ 	});
+
+	app.controller("weatherCtl",function($http, $log, $scope){
+ 		$scope.show = false;
+ 		$scope.submitById = function(){
+ 			$http.get("http://localhost:8080/demo/weather/v1/getweatherByCityName?param="+$scope.cityName).then(function(response){
+ 				$log.info("productList>>"+JSON.stringify(response.data.data))
+ 				if(response.data.code =='SUCCESS'){
+ 					$scope.show = false;
+ 					$scope.weatherList = response.data.data;
+ 				}else {
+ 					$scope.show = true;
+ 					$scope.message ="Server Error. Please try after sometime";
+ 				}
+ 			},function(error){
+ 				$scope.show = true;
+				$scope.message ="Server Error. Please try after sometime";
+ 			})
+ 		}
+ 	});
+	
+</script>
+</html>
